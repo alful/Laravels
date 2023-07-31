@@ -44,12 +44,23 @@
                             class="form-control rounded-bottom @error('password') is-invalid @enderror" id="password"
                             placeholder="Password" required value="{{ old('password') }}">
                         <label for="password">Password</label>
+
+                        <div class="col-6 mt-2">
+                            <div class="form-group form-check text-left">
+                                <input type="checkbox" name="show_hide" class="form-check-input" id="show_hide" />
+                                <label class="form-check-label" for="show_hide" onclick="showHide()">Show Password</label>
+                            </div>
+                        </div>
+
+
+
                         @error('password')
                             <div class="invalid-feedback">
                                 {{ $message }}
                             </div>
                         @enderror
                     </div>
+
 
                     <button class="btn btn-primary w-100 py-2 mt-4" type="submit">Register</button>
                 </form>

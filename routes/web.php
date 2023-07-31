@@ -1,10 +1,13 @@
 <?php
 
+use App\Http\Controllers\DashboardPostController;
 use App\Models\Category;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegisterController;
+use App\Providers\RouteServiceProvider;
+use NunoMaduro\Collision\Provider;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,7 +33,6 @@ use App\Http\Controllers\RegisterController;
 Route::get('/', function () {
     return view('home', [
         'title' => 'Home',
-        "active" => 'home',
 
         'name' => 'Muhammad Alful Falakh',
         'email' => 'alfulfalakh@gmail.com',
@@ -41,7 +43,6 @@ Route::get('/', function () {
 Route::get('/about', function () {
     return view('about', [
         'title' => 'About',
-        "active" => 'about',
 
         'name' => 'Muhammad Alful Falakh',
         'email' => 'alfulfalakh@gmail.com',
@@ -115,7 +116,23 @@ Route::get('/categories', function () {
 //     ]);
 // });
 
-Route::get('/login', [LoginController::class, 'index']);
-Route::get('/register', [RegisterController::class, 'index']);
+// nanti diarahin sesuai Home dari App/Http/Provider/RouteServiceProvider
+// Route::get('/login', [LoginController::class, 'index'])->middleware('guest');
+
+
+Route::get('/login', [LoginController::class, 'index'])->name('login')->middleware('guest');
+Route::post('/login', [LoginController::class, 'authenticate']);
+Route::post('/logout', [LoginController::class, 'logout']);
+
+
+Route::get('/register', [RegisterController::class, 'index'])->middleware('guest');
 //nyimpan data
 Route::post('/register', [RegisterController::class, 'store']);
+
+
+Route::get('/dashboard', function () {
+    return view('dashboard.index');
+})->middleware('auth');
+
+Route::resource('/dashboard/posts', DashboardPostController::class)->middleware('auth');
+// Route::get('/dashboard/posts/{post:slug}');
