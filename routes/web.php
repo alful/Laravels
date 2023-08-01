@@ -129,10 +129,13 @@ Route::get('/register', [RegisterController::class, 'index'])->middleware('guest
 //nyimpan data
 Route::post('/register', [RegisterController::class, 'store']);
 
+Route::get('/dashboard/posts/checkSlug', [DashboardPostController::class, 'checkSlug'])->middleware('auth')->name('posts.checkSlug');
 
 Route::get('/dashboard', function () {
     return view('dashboard.index');
 })->middleware('auth');
 
 Route::resource('/dashboard/posts', DashboardPostController::class)->middleware('auth');
+
+
 // Route::get('/dashboard/posts/{post:slug}');
