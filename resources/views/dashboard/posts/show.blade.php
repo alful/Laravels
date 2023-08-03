@@ -20,9 +20,16 @@
 
                 {{-- {{$post->body}} --}}
 
-                {{-- untuk menghilangkan tag html --}}
-                <img src="https://images.unsplash.com/photo-1461988320302-91bde64fc8e4?ixid=2yJhcHBfaWQiOjEyMDd9&fm=jpg&fm{{ $post->category->name }}"
-                    alt="{{ $post->category->name }}" class="img-fluid mt-3">
+                @if ($post->image)
+                    <div style="max-height: 350px; overflow:hidden;">
+                        <img src="{{ asset('storage/' . $post->image) }}" alt="{{ $post->category->name }}"
+                            class="img-fluid mt-3">
+                    </div>
+                @else
+                    {{-- untuk menghilangkan tag html --}}
+                    <img src="https://images.unsplash.com/photo-1461988320302-91bde64fc8e4?ixid=2yJhcHBfaWQiOjEyMDd9&fm=jpg&fm{{ $post->category->name }}"
+                        alt="{{ $post->category->name }}" class="img-fluid mt-3">
+                @endif
                 <article class="my-3 fs-6">
                     {!! $post->body !!}
 
