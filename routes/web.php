@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegisterController;
+use App\Models\Post;
 use App\Providers\RouteServiceProvider;
 use NunoMaduro\Collision\Provider;
 
@@ -37,9 +38,10 @@ Route::get('/', function () {
 
         'name' => 'Muhammad Alful Falakh',
         'email' => 'alfulfalakh@gmail.com',
-
     ]);
 });
+
+
 
 Route::get('/about', function () {
     return view('about', [

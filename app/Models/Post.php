@@ -2,10 +2,11 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\View\View;
 use Illuminate\Database\Eloquent\Model;
 
 use Cviebrock\EloquentSluggable\Sluggable;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Post extends Model
 {
@@ -32,10 +33,26 @@ class Post extends Model
         return $this->belongsTo(Category::class);
     }
 
+
+    //penggunaan fungsi dibawah akan terjadi apabila ada pengambilan data menggunakan $post->author-> ... . hal ini terjadi karena tabel user id diganti dengan author seperti dibawah. sehingga pengambilan data akan berubah
     public function author()
     {
         return $this->belongsTo(User::class, 'user_id');
     }
+
+    // public function postss()
+    // {
+    //     return $this->latest()->take(3)->get();
+    // }
+
+
+    // public function image()
+    // {
+    //     return $this->has(Post::class, 'image');
+    // }
+
+
+
     //scope harus ada
     public function scopeFilter($query, array $filters)
     {

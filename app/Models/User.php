@@ -29,6 +29,11 @@ class User extends Authenticatable
     {
         return $this->hasMany(Post::class);
     }
+
+    // public function postss()
+    // {
+    //     return $this->belongsToMany(Category::class);
+    // }
     /**
      * The attributes that should be hidden for serialization.
      *
