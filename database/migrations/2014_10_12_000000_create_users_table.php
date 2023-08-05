@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('username')->unique();
             $table->string('email')->unique();
             $table->string('password');
-            $table->boolean('is_admin')->default(false);
+            // $table->boolean('is_admin')->default(false);
             $table->rememberToken();
             $table->timestamps();
         });
@@ -29,5 +29,7 @@ return new class extends Migration
     public function down(): void
     {
         Schema::dropIfExists('users');
+        // $table->dropColumn('is_admin');
+
     }
 };

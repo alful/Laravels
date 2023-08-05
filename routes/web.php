@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminCategoryController;
 use App\Http\Controllers\DashboardCategoryController;
 use App\Http\Controllers\DashboardPostController;
 use App\Models\Category;
@@ -139,9 +140,10 @@ Route::get('/dashboard', function () {
 })->middleware('auth');
 
 Route::resource('/dashboard/posts', DashboardPostController::class)->middleware('auth');
-Route::resource('/dashboard/categories', DashboardCategoryController::class)->middleware('auth');
+// Route::resource('/dashboard/categories', DashboardCategoryController::class)->middleware('auth');
 Route::get('/dashboard/categories/checkSlug', [DashboardCategoryController::class, 'checkSlug'])->middleware('auth')->name('categories.checkSlug');
 
+Route::resource('/dashboard/categories', AdminCategoryController::class)->except('show')->middleware('is_admin');
 
 
 // Route::get('/dashboard/posts/{post:slug}');

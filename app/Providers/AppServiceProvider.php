@@ -4,7 +4,9 @@ namespace App\Providers;
 
 use view;
 use App\Models\Post;
+use App\Models\User;
 use Illuminate\Pagination\Paginator;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -25,6 +27,10 @@ class AppServiceProvider extends ServiceProvider
         //
         // untuk pakai paginator(next/previous page) framework bootsrap
         Paginator::useBootstrap();
+
+        Gate::define('is_admin', function (User $user) {
+            return $user->is_admin;
+        });
 
         // view()->share()
 
